@@ -1,0 +1,95 @@
+.dashboard {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    height: 100vh;
+    background-color: #f4f4f4;
+    align-items: center; /* Center content horizontally */
+    padding: 20px; /* Add padding around the dashboard */
+}
+
+.main-content {
+    max-width: 800px; /* Limit the width of main content */
+    width: 100%; /* Full width */
+    background-color: white; /* White background for main content */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-image {
+    display: none; /* Remove header image as per your update */
+}
+
+h1 {
+    margin: 10px 0;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 30px;
+}
+
+.card {
+    border-radius: 10px;
+    padding: 30px; /* Padding for larger cards */
+    text-align: center;
+    color: white;
+    transition: transform 0.3s;
+    position: relative;
+    min-height: 200px; /* Increased height */
+}
+
+.card .icon {
+    font-size: 50px; /* Increased icon size */
+    margin-bottom: 10px;
+}
+
+/* Card Colors */
+.exercises {
+    background-color: #6a1b9a; /* Purple */
+}
+
+.goals {
+    background-color: #d32f2f; /* Red */
+}
+
+.journaling {
+    background-color: #1976d2; /* Blue */
+}
+
+.reviews {
+    background-color: #388e3c; /* Green */
+}
+
+.mood {
+    background-color: #fbc02d; /* Yellow */
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Button Styles */
+.button {
+    display: inline-block;
+    background-color: white; /* Button background */
+    color: #3f51b5; /* Button text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 15px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: #3f51b5; /* Darker button background on hover */
+    color: white; /* White text on hover */
+}

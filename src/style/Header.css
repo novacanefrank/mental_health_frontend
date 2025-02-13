@@ -1,0 +1,73 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Reduced padding for a smaller header */
+  background-color: #4A90E2; /* Light blue header background */
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.logo {
+  flex: 0 0 auto; /* Keep logo size auto without growing */
+}
+
+.logo-img {
+  height: 60px; /* Adjust height for better visibility */
+  width: auto; /* Maintain aspect ratio */
+}
+
+.nav-links {
+  display: flex; /* Horizontal layout for links */
+  justify-content: center; /* Center the links */
+  flex: 1; /* Allow nav-links to take available space */
+  gap: 30px; /* Space between links */
+}
+
+.nav-link {
+  color: white; /* Link text color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.nav-link:hover {
+  color: #fbc02d; /* Change color on hover */
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px; /* Space between buttons */
+}
+
+.sign-in, .sign-up {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sign-in {
+  background-color: white; /* White background for Sign In */
+  color: #4A90E2; /* Text color matching header */
+  border: 2px solid #4A90E2; /* Border for Sign In */
+}
+
+.sign-in:hover {
+  background-color: #e0e0e0; /* Light grey on hover */
+}
+
+.sign-up {
+  background-color: #4CAF50; /* Green background for Sign Up */
+  color: white; /* Text color */
+}
+
+.sign-up:hover {
+  background-color: #388e3c; /* Darker green on hover */
+}
+
+.notification-icon, .profile-icon {
+  margin-left: 15px; /* Space between buttons and icons */
+  cursor: pointer; /* Pointer cursor for clickable icons */
+  font-size: 1.5rem; /* Larger icon size */
+}

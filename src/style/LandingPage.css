@@ -1,0 +1,86 @@
+.landing-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.header {
+    background-image: url('C:\Users\ACER\OneDrive\Documents\backend\Project\mental_health_frontend\novana\public\journal.png'); /* Path to your image */
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    height: 450px; /* Adjust height as needed */
+}
+
+.header h1 {
+    font-size: 3em;
+}
+
+.header p {
+    font-size: 1.5em;
+}
+
+.cta-buttons {
+    margin-top: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 30px;
+    background-color: #ff4081;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-button.secondary {
+    background-color: #1976d2;
+}
+
+.cta-button:hover {
+    background-color: #f50057;
+}
+
+.features {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.features h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.feature-items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    flex: 1;
+    max-width: 250px;
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item h3 {
+    font-size: 1.5em;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
