@@ -1,0 +1,64 @@
+/* 📝 Journal Page */
+.journal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f9f5f0; /* Soft beige like the image */
+    padding: 20px;
+}
+
+/* 📖 Title */
+.journal-title {
+    font-size: 24px;
+    color: #7d5a3c;
+    margin-bottom: 15px;
+    font-family: "Georgia", serif;
+}
+
+/* 📜 Journal Entry */
+.journal-entry {
+    width: 80%;
+    height: 300px;
+    border: 2px solid #b68d60;
+    background-color: #fcf7f2;
+    padding: 15px;
+    font-size: 16px;
+    font-family: "Georgia", serif;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 🌿 Decorative Image Upload */
+.journal-design {
+    margin-top: 15px;
+    text-align: center;
+}
+
+
+
+/* 🎯 Buttons */
+.journal-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.save-btn, .old-entries-btn {
+    background-color: #b68d60;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.save-btn:hover, .old-entries-btn:hover {
+    background-color: #8d6a44;
+}

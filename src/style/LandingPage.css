@@ -1,26 +1,26 @@
-.landing-page {
+/* .landing-page {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
 }
 
-.header {
-    background-image: url('C:\Users\ACER\OneDrive\Documents\backend\Project\mental_health_frontend\novana\public\journal.png'); /* Path to your image */
+.header_dash{
+    background-image: url('journal.png');
     background-size: cover;
     background-position: center;
     margin-top: 10px;
-    color: white;
+    color: rgb(25, 24, 24);
     padding: 60px 20px;
     text-align: center;
     height: 450px; /* Adjust height as needed */
-}
+/* }
 
-.header h1 {
+.header_dash h1 {
     font-size: 3em;
 }
 
-.header p {
+.header_dash  {
     font-size: 1.5em;
 }
 
@@ -83,4 +83,141 @@
     margin-top: 20px;
     padding: 20px;
     background-color: #f1f1f1;
+} */ 
+ /* Landing Page Styling */
+/* Landing Page Styling */
+/* General Styling */
+/* General Styling */
+/* General Styling */
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
+
+body {
+  scroll-behavior: smooth;
+  background-color: #f9f9f9;
+}
+
+/* Landing Page Container */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: auto;
+  padding: 0;
+  min-height: 100vh; /* Ensures full-screen section */
+}
+
+/* Text Content */
+.text-content {
+  max-width: 500px;
+  text-align: left;
+}
+
+.text-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.text-content p {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 20px 0;
+}
+
+.learn-more-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.learn-more-btn:hover {
+  background-color: #4f46e5;
+}
+
+/* Image Content */
+.image-content img {
+  width: 100%;
+  max-width: 1000px; /* Adjust size to be larger */
+  height: auto;
+  display: block;
+  margin-bottom: -10px; /* Fix extra space below */
+}
+
+/* Features Section */
+.features {
+  width: 100%;
+  background-color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+  margin-top: 0px; /* Remove extra space */
+}
+
+.features h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Feature Items */
+.feature-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.feature-item {
+  background: #f1f1f1;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.feature-item p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #6366f1;
+  color: #fff;
+  font-size: 1rem;
+}
+
+  

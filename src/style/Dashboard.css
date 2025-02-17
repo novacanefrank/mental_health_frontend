@@ -1,95 +1,169 @@
 .dashboard {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    height: 100vh;
-    background-color: #f4f4f4;
-    align-items: center; /* Center content horizontally */
-    padding: 20px; /* Add padding around the dashboard */
+    min-height: 100vh;
+    background-color: #ffffff;
+    overflow-y: auto;
+    padding-top: 80px; /* Adjust based on your header height */
 }
 
-.main-content {
-    max-width: 800px; /* Limit the width of main content */
-    width: 100%; /* Full width */
-    background-color: white; /* White background for main content */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+.content {
+    display: flex;
+    flex: 1; /* Take up remaining space */
+}
+
+.sidebar {
+    width: 250px; /* Fixed width for sidebar */
+    background-color: #ffffff; /* White background for sidebar */
+    border-right: 1px solid #ddd;
     padding: 20px;
 }
 
-.header {
+.quote-section {
+    background-color: #f0f8ff; /* Light background for quote */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.note-area {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+.calendar-component {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.options {
+    flex: 1; /* Take up remaining space */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for options section */
+}
+
+/* Gamification Progress Section */
+/* .progress-container {
     text-align: center;
     margin-bottom: 20px;
+    background: #eef5ff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
 }
 
-.header-image {
-    display: none; /* Remove header image as per your update */
+.progress-container h2 {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+    color: #333;
 }
 
-h1 {
-    margin: 10px 0;
+.progress-container p {
+    font-size: 1rem;
+    color: #666;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
-    gap: 30px;
-}
-
-.card {
-    border-radius: 10px;
-    padding: 30px; /* Padding for larger cards */
-    text-align: center;
-    color: white;
-    transition: transform 0.3s;
+.progress-bar {
     position: relative;
-    min-height: 200px; /* Increased height */
+    width: 100%;
+    height: 25px;
+    background: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
 }
 
-.card .icon {
-    font-size: 50px; /* Increased icon size */
-    margin-bottom: 10px;
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6dd5ed, #2193b0);
+    transition: width 0.5s ease-in-out;
 }
 
-/* Card Colors */
-.exercises {
-    background-color: #6a1b9a; /* Purple */
+.progress-icon {
+    position: absolute;
+    top: -10px;
+    font-size: 1.8rem;
+    transition: left 0.5s ease-in-out;
+} */
+
+/* Recommendations Section */
+.recommendation-image {
+    width: 50%; /* Make the image responsive */
+    height: 50%;
 }
 
-.goals {
-    background-color: #d32f2f; /* Red */
+.option-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
 }
 
-.journaling {
-    background-color: #1976d2; /* Blue */
+.option-card {
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s;
+    color: #333;
+    min-height: 150px;
 }
 
-.reviews {
-    background-color: #388e3c; /* Green */
+.option-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
 }
 
-.mood {
-    background-color: #fbc02d; /* Yellow */
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-/* Button Styles */
 .button {
     display: inline-block;
-    background-color: white; /* Button background */
-    color: #3f51b5; /* Button text color */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
     margin-top: 15px;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Make it full width */
+    margin-bottom: 20px; /* Space below the image */
 }
 
-.button:hover {
-    background-color: #3f51b5; /* Darker button background on hover */
-    color: white; /* White text on hover */
+.image-section img {
+    width: 100%; /* Full width */
+    height: auto; /* Keep aspect ratio */
+    max-height: 300px; /* Adjust this value if needed */
+    object-fit:scale-down; /* Ensures the image covers nicely */
+}
+
+
+
+
+/* Pastel colors for cards */
+.pastel-blue {
+    background-color: #b3d7e9;
+}
+
+.pastel-yellow {
+    background-color: #f9e6a1;
+}
+
+.pastel-pink {
+    background-color: #f4c2c2;
+}
+
+.pastel-green {
+    background-color: #a8e6cf;
+}
+
+.pastel-lavender {
+    background-color: #e6c9f7;
 }

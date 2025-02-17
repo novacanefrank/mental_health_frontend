@@ -1,73 +1,116 @@
-.navbar {
+body {
+  font-family: Arial, sans-serif; /* Default font */
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9; /* Light background for contrast */
+}
+
+.header {
   display: flex;
+  position: fixed;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px; /* Reduced padding for a smaller header */
-  background-color: #4A90E2; /* Light blue header background */
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  padding: 10px 20px; /* Increased padding for better spacing */
+  background-color: #cfad98; /* White background for header */
+  border-bottom: 1px solid #e0e0e0; /* Subtle border */
+  width: 100%; 
+  box-sizing: border-box; 
+  user-select: none;
+  z-index: 1000;
+  
 }
 
-.logo {
-  flex: 0 0 auto; /* Keep logo size auto without growing */
+.home_logo {
+  margin-left: 60px;
+  height: 50px; /* Adjust height as needed */
+  cursor: pointer;
 }
 
-.logo-img {
-  height: 60px; /* Adjust height for better visibility */
-  width: auto; /* Maintain aspect ratio */
+.logo-section {
+  display: flex;
+  align-items: center;
 }
 
-.nav-links {
-  display: flex; /* Horizontal layout for links */
-  justify-content: center; /* Center the links */
-  flex: 1; /* Allow nav-links to take available space */
-  gap: 30px; /* Space between links */
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 15px; /* Space between nav items */
 }
 
-.nav-link {
-  color: white; /* Link text color */
-  text-decoration: none; /* Remove underline */
+.navbar .nav-links li {
+  position: relative; 
+}
+
+.navbar .nav-links a {
+  text-decoration: none;
+  color: #333; /* Dark text for nav links */
+  font-size: 17px;
   transition: color 0.3s; /* Smooth color transition */
 }
 
-.nav-link:hover {
-  color: #fbc02d; /* Change color on hover */
+.navbar .nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px; 
+  width: 0;
+  height: 2px;
+  background-color: #218838; 
+  transition: width 0.3s ease; 
+}
+
+.navbar .nav-links a:hover::after {
+  width: 100%;
+}
+
+.navbar .nav-links a:hover {
+  color: #218838; /* Change color on hover */
 }
 
 .auth-buttons {
   display: flex;
-  gap: 15px; /* Space between buttons */
+  gap: 10px; /* Space between buttons */
 }
 
-.sign-in, .sign-up {
-  padding: 10px 15px;
+.login-button, .register-button {
+  padding: 10px 15px; /* Increased padding for buttons */
+  font-size: 17px;
   border: none;
-  border-radius: 5px;
+  border-radius: 5px; /* Rounded corners */
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  text-decoration: none;
 }
 
-.sign-in {
-  background-color: white; /* White background for Sign In */
-  color: #4A90E2; /* Text color matching header */
-  border: 2px solid #4A90E2; /* Border for Sign In */
+.login-button {
+  background-color: transparent; /* Transparent for login */
+  color: #218838; /* Text color for login */
 }
 
-.sign-in:hover {
-  background-color: #e0e0e0; /* Light grey on hover */
+.register-button {
+  background-color: #28a745; /* Green for register */
+  color: white;
 }
 
-.sign-up {
-  background-color: #4CAF50; /* Green background for Sign Up */
-  color: white; /* Text color */
+.login-button:hover {
+  background-color: #28a745; /* Background change on hover */
+  color: white;
+  transition: background-color 400ms;
 }
 
-.sign-up:hover {
-  background-color: #388e3c; /* Darker green on hover */
+.register-button:hover {
+  background-color: #218838; /* Darker green on hover */
 }
 
-.notification-icon, .profile-icon {
-  margin-left: 15px; /* Space between buttons and icons */
-  cursor: pointer; /* Pointer cursor for clickable icons */
-  font-size: 1.5rem; /* Larger icon size */
+/* Main Content Styles */
+.main-content {
+  margin-top: 80px;
+  padding: 20px; /* Padding for main content */
+  text-align: center; /* Center align text */
+}
+.profile-icon img {
+  width: 24px; /* Adjust size as needed */
+  height: 24px; /* Adjust size as needed */
 }

@@ -1,29 +1,45 @@
-import React from "react";
-import "../style/Header.css";
+import { Link } from "react-router-dom";
+import '../style/Header.css';
 
 const Header = () => {
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <img src="/novacane.png" alt="Novana Logo" className="logo-img" />
+    <div className="header">
+      {/* Logo Section */}
+      <div className="logo-section">
+        <Link to="/">
+          <img src="novacane.png "alt="Logo" className="home_logo" />
+        </Link>
       </div>
-      <div className="nav-links">
-        <a href="#" className="nav-link">Home</a>
-        <a href="#" className="nav-link">About Us</a>
-        <a href="#" className="nav-link">Contact</a>
-      </div>
+
+      {/* Middle Section: Navbar */}
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/reviews">Reviews</Link></li>
+          <li><Link to="/about-us">About Us</Link></li>
+          
+        </ul>
+      </nav>
+
+      {/* Authentication Buttons */}
       <div className="auth-buttons">
-        <button className="sign-in">Sign In</button>
-        <button className="sign-up">Sign Up</button>
+        <Link to="/login" className="login-button">Login</Link>
+        <Link to="/register" className="register-button">Sign Up</Link>
+        
       </div>
-      <div className="notification-icon">
-        <span>🔔</span> {/* Notification icon */}
-      </div>
-      <div className="profile-icon">
-        <span>👤</span> {/* Profile icon */}
-      </div>
-    </nav>
+    </div>
   );
 };
 
+// const MainContent = () => {
+//   return (
+//     <div className="main-content">
+//       <h1>Welcome to Novana</h1>
+//       <p>Your one-stop shop for quality products.</p>
+//       {/* Add more content as needed */}
+//     </div>
+//   );
+// };
+
+// export { Header, MainContent };
 export default Header;

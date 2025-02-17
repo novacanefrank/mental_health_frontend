@@ -1,38 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import "../style/MoodTracker.css";
 
 const MoodTracker = () => {
-    const [moods, setMoods] = useState([80, 70, 90, 60, 85, 75, 95]); // Example mood data
+    const moods = ["😊", "😢", "😡", "😴", "😐", "😁", "😔"];
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    
+    const [selectedMood, setSelectedMood] = useState(null);
+    const [weekMoods, setWeekMoods] = useState(() => {
+        const storedMoods = JSON.parse(localStorage.getItem("weekMoods")) || {};
+        return storedMoods;
+    });
+
+    const today = new Date().getDay(); // 0 = Sunday, 6 = Saturday
+
+    useEffect(() => {
+        localStorage.setItem("weekMoods", JSON.stringify(weekMoods));
+    }, [weekMoods]);
+
+    const saveMood = () => {
+        if (selectedMood) {
+            setWeekMoods({ ...weekMoods, [today]: selectedMood });
+            alert("Mood saved! 😊");
+            setSelectedMood(null);
+        } else {
+            alert("Please select a mood first!");
+        }
+    };
 
     return (
-        <div className="mood-tracker">
-            <header>
-                <h1>Mood Tracker</h1>
-                <p>Track your daily moods and reflect on your feelings!</p>
-            </header>
-            <main>
-                <section className="mood-scale">
-                    <h2>Mood Scale</h2>
-                    <div className="scale">
-                        {['Very Bad', 'Bad', 'Neutral', 'Good', 'Very Good'].map((mood, index) => (
-                            <div key={index} className="mood-bar" style={{ height: `${moods[index]}%`, backgroundColor: getMoodColor(index) }}>
-                                <span>{mood}</span>
-                            </div>
-                        ))}
+        <div className="mood-tracker-container">
+            <h2 className="mood-title">🌦️ Mood Tracker</h2>
+            
+            <div className="emoji-selection">
+                {moods.map((mood, index) => (
+                    <button
+                        key={index}
+                        className={`mood-button ${selectedMood === mood ? "selected" : ""}`}
+                        onClick={() => setSelectedMood(mood)}
+                    >
+                        {mood}
+                    </button>
+                ))}
+            </div>
+
+            <button className="save-btn" onClick={saveMood}>💾 Save Mood</button>
+
+            <h3 className="week-title">📅 This Week's Mood</h3>
+            <div className="week-moods">
+                {daysOfWeek.map((day, index) => (
+                    <div key={index} className={`day-mood ${index === today ? "today" : ""}`}>
+                        <span className="day-name">{day}</span>
+                        <span className="mood-emoji">{weekMoods[index] || "❔"}</span>
                     </div>
-                </section>
-                <section className="notes">
-                    <h2>Daily Reflections</h2>
-                    <textarea placeholder="Write your thoughts here..."></textarea>
-                </section>
-            </main>
+                ))}
+            </div>
         </div>
     );
-};
-
-const getMoodColor = (index) => {
-    const colors = ['#FF677D', '#FFABAB', '#FFE5B4', '#A8E6CF', '#A0E7E2']; // Colors for mood levels
-    return colors[index];
 };
 
 export default MoodTracker;

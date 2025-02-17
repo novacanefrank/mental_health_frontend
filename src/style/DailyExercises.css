@@ -1,0 +1,100 @@
+/* 🏋️ Exercise Page Main Container */
+.daily-exercises-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    background-color: #f9f5f0; /* Soft beige */
+    min-height: 80vh; /* Prevents overlap with header */
+    
+    padding-top: 80px;
+}
+
+/* 🏆 Exercise Card */
+.daily-exercises-card {
+    background: linear-gradient(to right, #e8d3b8, #dcc2a3); /* Soft brown gradient */
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    color: #5a3d2b;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    gap: 15px;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* 📝 Title */
+.title {
+    font-size: 2rem;
+    color: #5a3d2b;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: "Georgia", serif;
+}
+
+/* 🎯 Exercise Cards */
+.exercise-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px auto;
+    width: 70%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    border-left: 5px solid #8d6a44;
+}
+
+.exercise-card:hover {
+    transform: scale(1.03);
+    background: #f5e6d3; /* Subtle hover effect */
+}
+
+/* 🎭 Icons */
+.exercise-icon {
+    font-size: 2.5rem;
+    color: #8d6a44;
+    margin-bottom: 10px;
+}
+
+/* 📋 Exercise Text */
+.exercise-text {
+    font-size: 1.2rem;
+    color: #5a3d2b;
+    margin-bottom: 15px;
+}
+
+/* 🎯 Buttons */
+.exercise-button {
+    background: linear-gradient(to right, #b68d60, #8d6a44);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+}
+
+.exercise-button:hover {
+    background: linear-gradient(to right, #8d6a44, #6f5235);
+}
+
+/* 🔄 Responsive Design */
+@media (max-width: 768px) {
+    .daily-exercises-container {
+        width: 95%;
+        padding: 20px;
+    }
+    .exercise-card {
+        width: 90%;
+    }
+}
+
