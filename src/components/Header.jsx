@@ -21,7 +21,7 @@ const Header = () => {
         </ul>
       </nav>
 
-      {/* Authentication Buttons */}
+      
       <div className="auth-buttons">
         <Link to="/login" className="login-button">Login</Link>
         <Link to="/register" className="register-button">Sign Up</Link>

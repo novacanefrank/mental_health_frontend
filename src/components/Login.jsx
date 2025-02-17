@@ -10,8 +10,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Here you can add your authentication logic
-    // For now, we'll just redirect to the dashboard
+    
 
     navigate('/dashboard'); // Redirects to the dashboard
   };
@@ -20,7 +19,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-box">
         <div className="left-section">
-          <h2>Turn your ideas into reality.</h2>
+          <h2>Get track of your life</h2>
           <p>Start for free and get attractive offers from the community.</p>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
