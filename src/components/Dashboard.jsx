@@ -70,7 +70,7 @@ const Dashboard = () => {
                         </div>
                         <div className="option-card reviews pastel-green">
                             <FaChartLine className="option-icon" />
-                            <h3>Review Progress</h3>
+                            <h3>Reviews</h3>
                             <a href="ReviewProgress" className="button">View Progress</a>
                         </div>
                         <div className="option-card mood pastel-lavender">
