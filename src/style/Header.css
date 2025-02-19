@@ -11,6 +11,9 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  height: 70px; /* Keep the header size fixed */
+  display: flex;
+  align-items: center; 
   background-color: #cfad98;
   border-bottom: 1px solid #e0e0e0;
   width: 100%;
@@ -21,9 +24,12 @@ body {
 
 .home_logo {
   margin-left: 60px;
-  height: 50px;
-  cursor: pointer;
+  height: 70px; /* Increase logo size */
+  max-height: 100%; /* Ensure it doesn't exceed the header height */
+  width: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Prevent distortion */
 }
+
 
 .logo-section {
   display: flex;
