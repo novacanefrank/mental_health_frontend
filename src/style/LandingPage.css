@@ -66,7 +66,7 @@ body {
   margin: 20px 0;
 }
 
-.learn-more-btn {
+.about-button {
   padding: 12px 24px;
   font-size: 1rem;
   background-color: #6366f1;
@@ -77,7 +77,7 @@ body {
   transition: background 0.3s ease;
 }
 
-.learn-more-btn:hover {
+.about-button:hover {
   background-color: #4f46e5;
 }
 

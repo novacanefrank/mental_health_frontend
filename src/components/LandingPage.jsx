@@ -14,7 +14,9 @@ const LandingPage = () => {
             Your personal space for growth and self-care. Whether you're setting
             goals or reflecting on your day, we're here to support your journey.
           </p>
-          <button className="learn-more-btn">Learn More</button>
+          <button className="about-button">
+          <Link to="/About">About Us</Link>
+          </button>
         </div>
         <div className="image-content">
           <img src="landd.png" alt="Mental Health Illustration" />

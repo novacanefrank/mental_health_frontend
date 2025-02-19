@@ -11,6 +11,7 @@ import MoodTracker from "./components/MoodTracker";
 import SetGoals from "./components/SetGoals";
 import JournalEntry from "./components/JournalEntry";
 import ReviewProgress from "./components/ReviewProgress";
+import About from "./components/About";
 // import reportWebVitals from './reportWebVitals';
 
 createRoot(document.getElementById("root")).render(
@@ -28,6 +29,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/SetGoals" element={<SetGoals />} />
         <Route path="/JournalEntry" element={<JournalEntry />} />
         <Route path="/ReviewProgress" element={<ReviewProgress />} />
+        <Route path="/About" element={<About />} />
       </Routes>
     </Router>
   </StrictMode>
