@@ -1,8 +1,8 @@
 body {
-  font-family: Arial, sans-serif; /* Default font */
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9; /* Light background for contrast */
+  background-color: #f9f9f9;
 }
 
 .header {
@@ -10,19 +10,18 @@ body {
   position: fixed;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px; /* Increased padding for better spacing */
-  background-color: #cfad98; /* White background for header */
-  border-bottom: 1px solid #e0e0e0; /* Subtle border */
-  width: 100%; 
-  box-sizing: border-box; 
+  padding: 10px 20px;
+  background-color: #cfad98;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  box-sizing: border-box;
   user-select: none;
   z-index: 1000;
-  
 }
 
 .home_logo {
   margin-left: 60px;
-  height: 50px; /* Adjust height as needed */
+  height: 50px;
   cursor: pointer;
 }
 
@@ -36,29 +35,29 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 15px; /* Space between nav items */
+  gap: 15px;
 }
 
 .navbar .nav-links li {
-  position: relative; 
+  position: relative;
 }
 
 .navbar .nav-links a {
   text-decoration: none;
-  color: #333; /* Dark text for nav links */
+  color: #333;
   font-size: 17px;
-  transition: color 0.3s; /* Smooth color transition */
+  transition: color 0.3s;
 }
 
 .navbar .nav-links a::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -5px; 
+  bottom: -5px;
   width: 0;
   height: 2px;
-  background-color: #218838; 
-  transition: width 0.3s ease; 
+  background-color: #218838;
+  transition: width 0.3s ease;
 }
 
 .navbar .nav-links a:hover::after {
@@ -66,51 +65,101 @@ body {
 }
 
 .navbar .nav-links a:hover {
-  color: #218838; /* Change color on hover */
+  color: #218838;
 }
 
 .auth-buttons {
   display: flex;
-  gap: 10px; /* Space between buttons */
+  gap: 10px;
+  align-items: center;
 }
 
 .login-button, .register-button {
-  padding: 10px 15px; /* Increased padding for buttons */
+  padding: 10px 15px;
   font-size: 17px;
   border: none;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
 }
 
 .login-button {
-  background-color: transparent; /* Transparent for login */
-  color: #218838; /* Text color for login */
+  background-color: transparent;
+  color: #218838;
 }
 
 .register-button {
-  background-color: #28a745; /* Green for register */
+  background-color: #28a745;
   color: white;
 }
 
 .login-button:hover {
-  background-color: #28a745; /* Background change on hover */
+  background-color: #28a745;
   color: white;
   transition: background-color 400ms;
 }
 
 .register-button:hover {
-  background-color: #218838; /* Darker green on hover */
+  background-color: #218838;
 }
 
-/* Main Content Styles */
 .main-content {
   margin-top: 80px;
-  padding: 20px; /* Padding for main content */
-  text-align: center; /* Center align text */
+  padding: 20px;
+  text-align: center;
 }
-.profile-icon img {
-  width: 24px; /* Adjust size as needed */
-  height: 24px; /* Adjust size as needed */
+
+.logged-in-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.notification-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #5a3d2b;
+}
+
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #5a3d2b;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  color: #5a3d2b;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f5e6d3;
 }
