@@ -1,18 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./../style/Login.css";
+import { loginUser } from "../apis/api"; // Importing the API function
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Hook to navigate
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    
+    try {
+      const response = await loginUser({ email, password }); // Call login API
+      const { token, username } = response.data;
 
-    navigate('/dashboard'); // Redirects to the dashboard
+      // Store authentication details in local storage
+      localStorage.setItem("token", token);
+      localStorage.setItem("username", username);
+
+      alert("Login successful");
+      navigate("/dashboard"); // Redirect to dashboard after successful login
+    } catch (err) {
+      setError(err.response?.data?.error || "Login failed. Please check your credentials.");
+    }
   };
 
   return (
@@ -21,6 +34,7 @@ const Login = () => {
         <div className="left-section">
           <h2>Get track of your life</h2>
           <p>Start for free and get attractive offers from the community.</p>
+          {error && <p className="error-text">{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label>Email</label>

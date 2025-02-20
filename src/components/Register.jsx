@@ -1,28 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./../style/Register.css";
+import { registerUser } from "../apis/api"; // Importing the API function
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      // Call register API
+      const response = await registerUser(formData);
+      alert(response.data.message);
+      navigate("/login"); // Redirect to login after successful registration
+    } catch (err) {
+      // Improved error handling
+      if (err.response) {
+        // Server responded with a status other than 200
+        setError(err.response.data.error || "Registration failed.");
+      } else if (err.request) {
+        // Request was made but no response received
+        setError("No response from server. Please try again later.");
+      } else {
+        // Something else happened
+        setError("An unexpected error occurred.");
+      }
+    }
+  };
+
   return (
     <div className="register-container">
       <div className="register-box">
         <h2>Create Your Account</h2>
         <p>Join us to explore new opportunities.</p>
-        <form>
+        {error && <p className="error-text">{error}</p>}
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
-            <label>First Name</label>
-            <input type="text" placeholder="Enter your first name" required />
-          </div>
-          <div className="input-group">
-            <label>Last Name</label>
-            <input type="text" placeholder="Enter your last name" required />
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter your username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="input-group">
             <label>Email</label>
-            <input type="email" placeholder="email@gmail.com" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="email@gmail.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="input-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required />
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
           </div>
           <button type="submit" className="register-btn">Sign Up</button>
         </form>
