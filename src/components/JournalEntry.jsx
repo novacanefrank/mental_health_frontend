@@ -8,7 +8,7 @@ const JournalEntry = () => {
     const [oldEntries, setOldEntries] = useState([]); // State to hold old entries
     const [showOldEntries, setShowOldEntries] = useState(false); // State to toggle old entries visibility
 
-    const userId = 1; // Replace this with the actual user ID
+    const userId = localStorage.getItem("userId");
 
     // Save the current journal entry
     const saveEntry = async () => {
@@ -45,19 +45,34 @@ const JournalEntry = () => {
             setShowOldEntries(false); // Hide old entries if they're currently visible
             return;
         }
-
+    
+        if (!userId) {
+            alert("User not logged in. Please log in to view old journal entries.");
+            return;
+        }
+    
         try {
             const response = await getJournalEntries(); // Assuming this function fetches all journal entries
-            if (response.status === 200) {
-                const entries = response.data.filter(entry => entry.userId === userId); // Filter by userId
-                setOldEntries(entries);
-                setShowOldEntries(true); // Show the old entries section
-            }
+            console.log("Fetched entries:", response.data); // Log all entries
+            console.log("User ID from localStorage:", userId); // Log userId from localStorage
+            
+            // Log userId for each entry
+            response.data.forEach(entry => {
+                console.log("Entry userId:", entry.userId);
+            });
+    
+            const entries = response.data.filter(entry => entry.userId === Number(userId)); // Make sure the types match
+            console.log("Filtered entries:", entries); // Log the filtered entries
+            
+            setOldEntries(entries);
+            setShowOldEntries(true); // Show the old entries section
         } catch (error) {
             console.error("Error fetching old entries:", error);
             alert("Error fetching old entries. Please try again.");
         }
     };
+    
+   
 
     return (
         <div className="journal-container">

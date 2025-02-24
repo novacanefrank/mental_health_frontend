@@ -1,61 +1,76 @@
 import React, { useState, useEffect } from 'react';
-import { getGoals, setGoal, deleteGoal } from '../apis/api';  // Adjust path based on your folder structure
+import { getGoals, setGoal, updateGoal, deleteGoal } from '../apis/api';
 import '../style/SetGoals.css';
 
 const SetGoals = () => {
-    const [goals, setGoalsState] = useState([]); // Initialize goals as an empty array
+    const [goals, setGoalsState] = useState([]);
+    const [error, setError] = useState(null);
+    const [showAddGoalForm, setShowAddGoalForm] = useState(false); // State to toggle form visibility
+    const [newGoalTitle, setNewGoalTitle] = useState(''); // New goal title
+    const [newGoalDate, setNewGoalDate] = useState(new Date().toISOString().split('T')[0]); // New goal date
+    const userId = localStorage.getItem("userId"); // Get userId from local storage
 
-    // Fetch goals from API
     useEffect(() => {
-        const fetchGoals = async () => {
-            try {
-                const response = await getGoals(); // Using the imported API function
-                setGoalsState(response.data); // Assuming the API returns an array of goals
-            } catch (error) {
-                console.error('Error fetching goals:', error);
-            }
-        };
-        fetchGoals();
-    }, []);
+        if (userId) {
+            fetchGoals();
+        }
+    }, [userId]);
 
-    // Update goal's title
+    const fetchGoals = async () => {
+        try {
+            const response = await getGoals();
+            setGoalsState(response.data);
+        } catch (error) {
+            setError("Error fetching goals");
+            console.error("Error fetching goals:", error);
+        }
+    };
+
     const handleGoalChange = (index, value) => {
         const newGoals = [...goals];
         newGoals[index].title = value;
         setGoalsState(newGoals);
     };
 
-    // Toggle goal completion status
-    const handleGoalComplete = (index) => {
-        const newGoals = [...goals];
-        newGoals[index].isCompleted = !newGoals[index].isCompleted;
-        setGoalsState(newGoals);
-    };
-
-    // Delete goal from API
-    const handleDeleteGoal = async (index, goalId) => {
+    const handleGoalComplete = async (index) => {
+        const updatedGoal = { ...goals[index], isCompleted: !goals[index].isCompleted };
         try {
-            await deleteGoal(goalId); // Using the imported API function
-            setGoalsState(goals.filter((_, i) => i !== index)); // Remove goal from UI after deletion
+            await updateGoal(goals[index].id, updatedGoal);
+            fetchGoals();
         } catch (error) {
-            console.error('Error deleting goal:', error);
+            console.error("Error updating goal:", error);
         }
     };
 
-    // Add a new goal and save to API
-    const handleAddGoal = async () => {
-        // Create new goal with required fields: userId, title, Date, isCompleted.
-        const newGoal = { 
-            userId: 1, 
-            title: '', 
-            Date: new Date().toISOString().slice(0, 10), 
-            isCompleted: false 
-        };
+    const handleDeleteGoal = async (id) => {
         try {
-            const response = await setGoal(newGoal); // Using the imported API function
-            setGoalsState([...goals, response.data]); // Add the new goal returned from the API
+            await deleteGoal(id);
+            fetchGoals();
         } catch (error) {
-            console.error('Error adding goal:', error);
+            console.error("Error deleting goal:", error);
+        }
+    };
+
+    const addNewGoal = async () => {
+        if (!userId) {
+            setError("User not logged in. Please log in to set goals.");
+            return;
+        }
+
+        if (!newGoalTitle || !newGoalDate) {
+            setError("Please provide both title and date for the new goal.");
+            return;
+        }
+
+        const newGoal = { userId, title: newGoalTitle, Date: newGoalDate, isCompleted: false };
+        try {
+            const response = await setGoal(newGoal);
+            setGoalsState([...goals, response.data]);
+            setNewGoalTitle('');
+            setNewGoalDate(new Date().toISOString().split('T')[0]);
+            setShowAddGoalForm(false); // Close the form after adding the goal
+        } catch (error) {
+            console.error("Error adding goal:", error);
         }
     };
 
@@ -63,28 +78,58 @@ const SetGoals = () => {
         <div className="set-goals-container">
             <div className="set-goals-card">
                 <h2 className="title">📌 My Goals</h2>
-                <div className="goals-list">
-                    {goals.map((goal, index) => (
-                        <div key={goal.id || index} className={`goal-item ${goal.isCompleted ? "completed" : ""}`}>
-                            <input
-                                type="text"
-                                value={goal.title}
-                                onChange={(e) => handleGoalChange(index, e.target.value)}
-                                placeholder="🎯 Enter your goal..."
-                                className="goal-input"
-                            />
-                            <button className="check-button" onClick={() => handleGoalComplete(index)}>
-                                {goal.isCompleted ? '✅' : '✔️'}
-                            </button>
-                            <button className="delete-button" onClick={() => handleDeleteGoal(index, goal.id)}>
-                                ❌
-                            </button>
-                        </div>
-                    ))}
-                </div>
-                <button className="add-goal-btn" onClick={handleAddGoal}>
-                    ➕ Add Goal
-                </button>
+                {error && <p className="error-message">{error}</p>}
+
+                {/* Show new goal form if showAddGoalForm is true */}
+                {showAddGoalForm ? (
+                    <div className="add-goal-form">
+                        <input
+                            type="text"
+                            value={newGoalTitle}
+                            onChange={(e) => setNewGoalTitle(e.target.value)}
+                            placeholder="🎯 Goal Title"
+                            className="goal-input"
+                        />
+                        <input
+                            type="date"
+                            value={newGoalDate}
+                            onChange={(e) => setNewGoalDate(e.target.value)}
+                            className="goal-input"
+                        />
+                        <button className="save-btn" onClick={addNewGoal}>
+                            Save Goal
+                        </button>
+                        <button className="cancel-btn" onClick={() => setShowAddGoalForm(false)}>
+                            Cancel
+                        </button>
+                    </div>
+                ) : (
+                    <div className="goals-list">
+                        {goals.map((goal, index) => (
+                            <div key={goal.id} className={`goal-item ${goal.isCompleted ? "completed" : ""}`}>
+                                <input
+                                    type="text"
+                                    value={goal.title}
+                                    onChange={(e) => handleGoalChange(index, e.target.value)}
+                                    placeholder="🎯 Enter your goal..."
+                                    className="goal-input"
+                                />
+                                <button className="check-button" onClick={() => handleGoalComplete(index)}>
+                                    {goal.isCompleted ? '✅' : '✔️'}
+                                </button>
+                                <button className="delete-button" onClick={() => handleDeleteGoal(goal.id)}>
+                                    ❌
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {!showAddGoalForm && (
+                    <button className="add-goal-btn" onClick={() => setShowAddGoalForm(true)} disabled={!userId}>
+                        ➕ Add Goal
+                    </button>
+                )}
             </div>
         </div>
     );

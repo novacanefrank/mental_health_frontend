@@ -21,24 +21,26 @@ const Register = () => {
     setError("");
 
     try {
-      // Call register API
-      const response = await registerUser(formData);
-      alert(response.data.message);
-      navigate("/login"); // Redirect to login after successful registration
+        // Call register API
+        const response = await registerUser(formData);
+        
+        // Store userId in local storage
+        localStorage.setItem("userId", response.data.userId);
+
+        alert(response.data.message);
+        navigate("/login"); // Redirect to login after successful registration
     } catch (err) {
-      // Improved error handling
-      if (err.response) {
-        // Server responded with a status other than 200
-        setError(err.response.data.error || "Registration failed.");
-      } else if (err.request) {
-        // Request was made but no response received
-        setError("No response from server. Please try again later.");
-      } else {
-        // Something else happened
-        setError("An unexpected error occurred.");
-      }
+        // Improved error handling
+        if (err.response) {
+            setError(err.response.data.error || "Registration failed.");
+        } else if (err.request) {
+            setError("No response from server. Please try again later.");
+        } else {
+            setError("An unexpected error occurred.");
+        }
     }
-  };
+};
+
 
   return (
     <div className="register-container">

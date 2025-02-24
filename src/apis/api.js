@@ -23,7 +23,7 @@ const deleteExercise = (id) => api.delete(`/exercises/deleteExercise/${id}`);
 
 
 const getJournalEntries = () => api.get('/journalEntries/getJournalEntries');
-const getJournalEntriesById=(id)=>api.get(`/journalEntries/getJournalEntryById/${id}`);
+const getJournalEntriesById=(id)=> api.get(`/journalEntries/getJournalEntryById/${id}`);
 const addJournalEntry = (entryData) => api.post('/journalEntries/createJournalEntry', entryData);
 const updateJournalEntry = (id, data) => api.put(`/journalEntries/updateJournalEntry/${id}`, data);
 const deleteJournalEntry = (id) => api.delete(`/journalEntries/deleteJournalEntry/${id}`);

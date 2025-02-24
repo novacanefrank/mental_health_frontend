@@ -14,19 +14,20 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await loginUser({ email, password }); // Call login API
-      const { token, username } = response.data;
+        const response = await loginUser({ email, password }); // Call login API
+        const { token, username, userId } = response.data;
 
-      // Store authentication details in local storage
-      localStorage.setItem("token", token);
-      localStorage.setItem("username", username);
+        // Store authentication details in local storage
+        localStorage.setItem("token", token);
+        localStorage.setItem("username", username);
+        localStorage.setItem("userId", userId); // Store userId in local storage
 
-      alert("Login successful");
-      navigate("/dashboard"); // Redirect to dashboard after successful login
+        alert("Login successful");
+        navigate("/dashboard"); // Redirect to dashboard after successful login
     } catch (err) {
-      setError(err.response?.data?.error || "Login failed. Please check your credentials.");
+        setError(err.response?.data?.error || "Login failed. Please check your credentials.");
     }
-  };
+};
 
   return (
     <div className="login-container">
