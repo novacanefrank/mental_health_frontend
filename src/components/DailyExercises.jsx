@@ -1,64 +1,102 @@
 import React, { useState, useEffect } from "react";
-import { FaPlus } from "react-icons/fa";
-import { getExercises, createExercise, updateExercise, deleteExercise } from "../apis/api";
+import { FaRegClock, FaLeaf, FaEye, FaPlus } from "react-icons/fa";
+import "../style/DailyExercises.css"; 
+import { getExercises, createExercise, updateExercise, deleteExercise } from "../apis/api"; // API Import
 
 const DailyExercises = () => {
-    const [exercises, setExercises] = useState([]);
-    const [newExercise, setNewExercise] = useState('');
-    const [loading, setLoading] = useState(false);
+  const [customExercises, setCustomExercises] = useState([]);
+  const [newExercise, setNewExercise] = useState("");
+  const [activeCustomExercises, setActiveCustomExercises] = useState({});
+  const userId = 1;  // Replace with the logged-in user's ID
 
-    useEffect(() => {
-        fetchExercises();
-    }, []);
+  useEffect(() => {
+    fetchExercises();
+  }, []);
 
-    const fetchExercises = async () => {
-        try {
-            const response = await getExercises();
-            setExercises(response.data);
-        } catch (error) {
-            console.error('Error fetching exercises:', error);
-        }
-    };
+  const fetchExercises = async () => {
+    try {
+      const response = await getExercises();
+      setCustomExercises(response.data);
+    } catch (error) {
+      console.error("Error fetching exercises:", error);
+    }
+  };
 
-    const addExercise = async () => {
-        if (!newExercise.trim()) return;
+  const addCustomExercise = async () => {
+    if (!newExercise.trim()) return;
+    try {
+      const response = await createExercise({ title: newExercise, userId });
+      setCustomExercises([...customExercises, response.data]);
+      setActiveCustomExercises((prev) => ({
+        ...prev,
+        [response.data.id]: false,
+      }));
+      setNewExercise("");
+    } catch (error) {
+      console.error("Error adding exercise:", error);
+    }
+  };
 
-        try {
-            const response = await createExercise({
-                userId: 1, 
-                description: newExercise,
-            });
+  const toggleCustomExercise = async (exercise) => {
+    const isActive = !activeCustomExercises[exercise.id];
+    try {
+      await updateExercise(exercise.id, { title: exercise.title, userId, isActive });
+      setActiveCustomExercises((prev) => ({
+        ...prev,
+        [exercise.id]: isActive,
+      }));
+    } catch (error) {
+      console.error("Error updating exercise:", error);
+    }
+  };
 
-            setExercises([...exercises, response.data]);
-            setNewExercise('');
-        } catch (error) {
-            console.error('Error adding exercise:', error);
-        }
-    };
+  const removeExercise = async (id) => {
+    try {
+      await deleteExercise(id);
+      setCustomExercises(customExercises.filter((exercise) => exercise.id !== id));
+      setActiveCustomExercises((prev) => {
+        const updatedExercises = { ...prev };
+        delete updatedExercises[id];
+        return updatedExercises;
+      });
+    } catch (error) {
+      console.error("Error deleting exercise:", error);
+    }
+  };
 
-    return (
-        <div>
-            <h2>Daily Exercises</h2>
-            <input
-                type="text"
-                placeholder="Enter exercise..."
-                value={newExercise}
-                onChange={(e) => setNewExercise(e.target.value)}
-            />
-            <button onClick={addExercise}>
-                <FaPlus /> Add
-            </button>
+  return (
+    <div className="daily-exercises-container">
+      <h2 className="title">Daily Exercises</h2>
 
-            <ul>
-                {exercises.map((exercise) => (
-                    <li key={exercise.id}>
-                        <span>{exercise.description}</span>
-                        <button onClick={() => deleteExercise(exercise.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
+      <div className="exercise-card">
+        <h3>Add Your Own Exercise</h3>
+        <FaPlus className="exercise-icon" />
+        <input
+          type="text"
+          value={newExercise}
+          onChange={(e) => setNewExercise(e.target.value)}
+          className="exercise-input"
+          placeholder="Enter exercise name"
+        />
+        <button className="exercise-button" onClick={addCustomExercise}>
+          Add Exercise
+        </button>
+      </div>
+
+      {customExercises.map((exercise) => (
+        <div key={exercise.id} className="exercise-card">
+          <h3>{exercise.title}</h3> {/* Adjusted to 'title' field */}
+          <p className="exercise-text">Custom Exercise</p>
+          <button className="exercise-button" onClick={() => toggleCustomExercise(exercise)}>
+            {activeCustomExercises[exercise.id] ? "Stop Exercise" : "Start Exercise"}
+          </button>
+          <button className="delete-button" onClick={() => removeExercise(exercise.id)}>
+            Delete
+          </button>
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default DailyExercises;

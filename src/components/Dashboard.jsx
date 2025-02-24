@@ -68,7 +68,7 @@ const Dashboard = () => {
                             <h3>Journal Entry</h3>
                             <a href="/JournalEntry" className="button">Write Now</a>
                         </div>
-                        <div className="option-card reviews pastel-green">
+                        {/* <div className="option-card reviews pastel-green">
                             <FaChartLine className="option-icon" />
                             <h3>Reviews</h3>
                             <a href="ReviewProgress" className="button">View Progress</a>
@@ -77,7 +77,7 @@ const Dashboard = () => {
                             <FaSmile className="option-icon" />
                             <h3>Track Your Mood</h3>
                             <a href="/MoodTracker" className="button">Track Mood</a>
-                        </div>
+                        </div> */}
                         
                         </div>
                 </section>
