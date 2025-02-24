@@ -75,3 +75,61 @@
 .save-btn:hover, .old-entries-btn:hover {
     background-color: #8d6a44;
 }
+
+/* 📜 Old Entries Box Container */
+.old-entries-section {
+    width: 80%;
+    max-width: 600px;
+    margin-top: 20px; /* Spacing between entries */
+}
+
+/* 📖 Old Entries Title */
+.old-entries-section h3 {
+    color: #7d5a3c;
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* 📜 Individual Old Entry Box */
+.old-entry-box {
+    background: #fcf7f2; /* Same color as journal entry */
+    border: 2px solid #b68d60;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 15px; /* Space between entries */
+}
+
+/* 📖 Entry Title */
+.entry-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #7d5a3c;
+    margin-bottom: 5px;
+}
+
+/* 📝 Entry Content */
+.entry-content {
+    font-size: 16px;
+    color: #4a4a4a;
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+/* 📅 Entry Date */
+.entry-date {
+    font-size: 12px;
+    color: #777;
+    display: block;
+    margin-top: 8px;
+    text-align: right;
+    font-style: italic;
+}
+
+/* Hover Effect for Old Entry Box */
+.old-entry-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}

@@ -22,7 +22,7 @@ const JournalEntry = () => {
                 title,
                 entry,
                 userId, // Assuming you have the user ID available
-                Date: new Date().toISOString(),
+                Date: new Date().toISOString(), // Set the current date here
             };
 
             // Call the API to save the journal entry
@@ -41,6 +41,11 @@ const JournalEntry = () => {
 
     // Fetch old journal entries
     const fetchOldEntries = async () => {
+        if (showOldEntries) {
+            setShowOldEntries(false); // Hide old entries if they're currently visible
+            return;
+        }
+
         try {
             const response = await getJournalEntries(); // Assuming this function fetches all journal entries
             if (response.status === 200) {
@@ -85,13 +90,15 @@ const JournalEntry = () => {
                     {oldEntries.length === 0 ? (
                         <p>No old entries found.</p>
                     ) : (
-                        oldEntries.map((entry, index) => (
-                            <div key={index} className="old-entry">
-                                <h4>{entry.title}</h4>
-                                <p>{entry.entry}</p>
-                                <small>{entry.Date}</small>
-                            </div>
-                        ))
+                        <div className="entries-grid">
+                            {oldEntries.map((entry, index) => (
+                                <div key={index} className="old-entry-box">
+                                    <h4 className="entry-title">{entry.title}</h4>
+                                    <p className="entry-content">{entry.entry}</p>
+                                    <small className="entry-date">{entry.Date}</small>
+                                </div>
+                            ))}
+                        </div>
                     )}
                 </div>
             )}

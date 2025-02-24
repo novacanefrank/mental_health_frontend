@@ -1,57 +1,115 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { FaUserCircle, FaBell } from "react-icons/fa";
-import '../style/Header.css';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import "../style/Header.css"; 
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); 
+    const storedUsername = localStorage.getItem("username");
+
+    if (token && token !== "false" && token !== "null" && token !== "undefined" && token.trim() !== "") {
+      setIsLoggedIn(true);
+      setUsername(storedUsername || "User"); 
+    } else {
+      setIsLoggedIn(false);
+      setUsername(null);
+      localStorage.removeItem("token");
+    }
+  }, []);
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    console.log("Logging out..."); // Debugging log
+    setShowLogoutConfirm(true); // Set to true to show confirmation
   };
 
+  const confirmLogout = () => {
+    console.log("Confirmed logout"); // Debugging log
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setIsLoggedIn(false);
+    setUsername(null);
+    setShowLogoutConfirm(false); // Close the confirmation
+    navigate("/"); // Redirect to home or login page
+  };
+
+  const cancelLogout = () => {
+    console.log("Cancelled logout"); // Debugging log
+    setShowLogoutConfirm(false); // Close confirmation without logout
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="header">
-      {/* Logo Section */}
-      <div className="logo-section">
-        <Link to="/">
-          <img src="novacane.png" alt="Logo" className="home_logo" />
-        </Link>
-      </div>
+    <>
+      <header className="header">
+        <div className="logo-section">
+          <Link to="/">
+            <img src="novacane.png" alt="Logo" className="home_logo" />
+          </Link>
+        </div>
 
-      {/* Middle Section: Navbar */}
-      <nav className="navbar">
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/reviews">Reviews</Link></li>
-          <li><Link to="/About">About Us</Link></li>
-        </ul>
-      </nav>
+        <nav className="navbar">
+          <ul className="nav-links">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/reviews">Reviews</Link></li>
+            <li><Link to="/about">About Us</Link></li>
+          </ul>
+        </nav>
 
-      {/* Right Section: Authentication or Profile & Notifications */}
-      <div className="auth-buttons">
-        {isLoggedIn ? (
-          <div className="logged-in-section">
-            <FaBell className="notification-icon" />
-            <div className="profile-dropdown">
-              <FaUserCircle className="profile-icon" onClick={() => setShowDropdown(!showDropdown)} />
+        <div className="auth-section">
+          {isLoggedIn ? (
+            <div className={`user-profile ${showDropdown ? "show-dropdown" : ""}`} ref={dropdownRef}>
+              <div className="user-info" onClick={() => setShowDropdown(!showDropdown)}>
+                <FaUserCircle className="user-icon" />
+                <span className="username">{username}</span>
+              </div>
               {showDropdown && (
-                <div className="dropdown-menu">
-                  <Link to="/profile" className="dropdown-item">Profile</Link>
-                  <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                <div className="user-dropdown">
+                  <ul>
+                    <Link to="/dashboard" className="dropdown-item"><li>Dashboard</li></Link>
+                    <li className="logout-item" onClick={handleLogout}>Logout</li>
+                  </ul>
                 </div>
               )}
             </div>
+          ) : (
+            <div className="auth-buttons">
+              <Link to="/login" className="login-button">Login</Link>
+              <Link to="/register" className="register-button">Sign Up</Link>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Logout Confirmation Popup */}
+      {showLogoutConfirm && (
+        <div className="logout-confirmation show">
+          <p>Are you sure you want to logout?</p>
+          <div className="logout-buttons">
+            <button className="logout-yes" onClick={confirmLogout}>Yes</button>
+            <button className="logout-no" onClick={cancelLogout}>No</button>
           </div>
-        ) : (
-          <>
-            <Link to="/login" className="login-button">Login</Link>
-            <Link to="/register" className="register-button">Sign Up</Link>
-          </>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 
