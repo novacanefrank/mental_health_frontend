@@ -35,6 +35,32 @@
     margin-bottom: 20px;
     resize: none;
 }
+.save-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* To make sure padding doesn't overflow */
+}
+
+.save-button:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+.save-button:focus {
+    outline: none;
+}
+
+.save-button:active {
+    background-color: #3e8e41; /* Even darker green when clicked */
+}
+
 
 .calendar-component {
     border: 1px solid #ddd;
@@ -102,18 +128,26 @@
 
 .option-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Increase min width */
+    gap: 30px; /* Slightly bigger gap for spacing */
 }
 
 .option-card {
-    padding: 30px;
-    border-radius: 12px;
+    padding: 45px; /* Increase padding */
+    border-radius: 15px; /* Slightly more rounded */
     text-align: center;
     transition: transform 0.3s;
     color: #333;
-    min-height: 150px;
+    min-height: 200px; /* Keep increased height */
+    font-size: 1.2rem; /* Make text slightly larger */
+    width: 100%; /* Ensure full width */
 }
+
+.option-card .option-icon {
+    font-size: 3.5rem; /* Make icons bigger */
+}
+
+
 
 .option-icon {
     font-size: 2.5rem;

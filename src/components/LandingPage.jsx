@@ -42,11 +42,11 @@ const LandingPage = () => {
             <h3>Goal Setting</h3>
             <p>Set achievable goals to foster growth and keep track of your progress.</p>
           </div>
-          <div className="feature-item">
+          {/* <div className="feature-item">
             <FaSmile className="feature-icon" />
             <h3>Mood Tracker</h3>
             <p>Monitor your mood daily to identify patterns and triggers.</p>
-          </div>
+          </div> */}
         </div>
       </section>
 

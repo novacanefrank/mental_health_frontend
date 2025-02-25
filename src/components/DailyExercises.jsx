@@ -7,7 +7,7 @@ const DailyExercises = () => {
   const [customExercises, setCustomExercises] = useState([]);
   const [newExercise, setNewExercise] = useState("");
   const [activeCustomExercises, setActiveCustomExercises] = useState({});
-  const userId = 1;  // Replace with the logged-in user's ID
+  const userId = Number(localStorage.getItem("userId")); // Get userId dynamically
 
   useEffect(() => {
     fetchExercises();
@@ -15,8 +15,9 @@ const DailyExercises = () => {
 
   const fetchExercises = async () => {
     try {
-      const response = await getExercises();
-      setCustomExercises(response.data);
+      const response = await getExercises();  // Fetch exercises for the current user
+      const userExercises = response.data.filter(exercise => exercise.userId === userId); // Filter exercises based on userId
+      setCustomExercises(userExercises);
     } catch (error) {
       console.error("Error fetching exercises:", error);
     }

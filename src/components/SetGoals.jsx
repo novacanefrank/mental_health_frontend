@@ -19,12 +19,14 @@ const SetGoals = () => {
     const fetchGoals = async () => {
         try {
             const response = await getGoals();
-            setGoalsState(response.data);
+            const userGoals = response.data.filter(goal => goal.userId === userId); // Filter goals for the current user
+            setGoalsState(userGoals);
         } catch (error) {
             setError("Error fetching goals");
             console.error("Error fetching goals:", error);
         }
     };
+    
 
     const handleGoalChange = (index, value) => {
         const newGoals = [...goals];

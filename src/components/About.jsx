@@ -5,24 +5,20 @@ const About = () => {
   return (
     <div className="about-container">
       {/* Image Section */}
-      <div className="about-image">
+      {/* <div className="about-image">
         <img
           src="giphy.gif" // Replace with your image URL
           alt="Team"
         />
-      </div>
+      </div> */}
 
       {/* Text Section */}
       <div className="about-text">
         <h2>Who Are We?</h2>
         <p>
-          We help people to build incredible brands and superior products.
-          Our perspective is to furnish outstanding captivating services.
+        At Novana, our mission is to empower individuals to take control of their personal growth and mental well-being. We understand that achieving goals and maintaining a positive mindset can be challenging, which is why we've created a platform that integrates goal setting, journaling exercises, and mood tracking all in one place. Our goal is to provide users with a simple, intuitive tool to track progress, reflect on their thoughts, and stay motivated. Whether you’re striving for personal development or just need a daily mental health check-in, we’re here to support you every step of the way. We believe that with the right tools, everyone can unlock their potential and live a more fulfilling life.
         </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel
-          consequat nibh, ac interdum nisl.
-        </p>
+        
 
         {/* Features Section */}
         <div className="about-features">

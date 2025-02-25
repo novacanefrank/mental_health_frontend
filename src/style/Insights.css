@@ -1,0 +1,59 @@
+/* Insights.css */
+
+.insights-container {
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #f5f8fc;
+    border-radius: 10px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #4f4f4f;
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .insights-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .insight-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .insight-emoji {
+    font-size: 30px;
+    margin-right: 20px;
+  }
+  
+  .insight-content h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .insight-content p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .insight-item:hover {
+    background-color: #eef1fa;
+    transition: background-color 0.3s ease;
+  }
+  
+  .insight-item h2 {
+    color: #4f6a92;
+  }
+  

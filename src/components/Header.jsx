@@ -5,7 +5,6 @@ import "../style/Header.css";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const dropdownRef = useRef(null);
@@ -13,14 +12,11 @@ const Header = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token"); 
-    const storedUsername = localStorage.getItem("username");
 
     if (token && token !== "false" && token !== "null" && token !== "undefined" && token.trim() !== "") {
       setIsLoggedIn(true);
-      setUsername(storedUsername || "User"); 
     } else {
       setIsLoggedIn(false);
-      setUsername(null);
       localStorage.removeItem("token");
     }
   }, []);
@@ -33,9 +29,7 @@ const Header = () => {
   const confirmLogout = () => {
     console.log("Confirmed logout"); // Debugging log
     localStorage.removeItem("token");
-    localStorage.removeItem("username");
     setIsLoggedIn(false);
-    setUsername(null);
     setShowLogoutConfirm(false); // Close the confirmation
     navigate("/"); // Redirect to home or login page
   };
@@ -71,6 +65,7 @@ const Header = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/reviews">Reviews</Link></li>
             <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/insights">Insights</Link></li>
           </ul>
         </nav>
 
@@ -79,7 +74,6 @@ const Header = () => {
             <div className={`user-profile ${showDropdown ? "show-dropdown" : ""}`} ref={dropdownRef}>
               <div className="user-info" onClick={() => setShowDropdown(!showDropdown)}>
                 <FaUserCircle className="user-icon" />
-                <span className="username">{username}</span>
               </div>
               {showDropdown && (
                 <div className="user-dropdown">
