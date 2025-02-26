@@ -113,7 +113,7 @@ body {
 }
 
 .feature-item {
-  background: #f1f1f1;
+  background: #f8f4f4;
   padding: 20px;
   border-radius: 10px;
   max-width: 300px;
@@ -123,7 +123,7 @@ body {
 
 .feature-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 15px #f163c6);
 }
 
 .feature-item h3 {
@@ -139,7 +139,7 @@ body {
 /* Feature Icons */
 .feature-icon {
   font-size: 2.5rem;
-  color: #6366f1;
+  color: #f163c6;
   margin-bottom: 10px;
 }
 

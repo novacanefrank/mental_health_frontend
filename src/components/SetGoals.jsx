@@ -5,7 +5,7 @@ import '../style/SetGoals.css';
 const SetGoals = () => {
     const [goals, setGoalsState] = useState([]);
     const [error, setError] = useState(null);
-    const [showAddGoalForm, setShowAddGoalForm] = useState(false); // State to toggle form visibility
+    const [showAddGoalForm, setShowAddGoalForm] = useState(false); // Toggle form visibility
     const [newGoalTitle, setNewGoalTitle] = useState(''); // New goal title
     const [newGoalDate, setNewGoalDate] = useState(new Date().toISOString().split('T')[0]); // New goal date
     const userId = localStorage.getItem("userId"); // Get userId from local storage
@@ -19,14 +19,14 @@ const SetGoals = () => {
     const fetchGoals = async () => {
         try {
             const response = await getGoals();
-            const userGoals = response.data.filter(goal => goal.userId === userId); // Filter goals for the current user
+            // **Filter goals by userId to ensure only the current user's goals are shown**
+            const userGoals = response.data.filter(goal => goal.userId.toString() === userId);
             setGoalsState(userGoals);
         } catch (error) {
             setError("Error fetching goals");
             console.error("Error fetching goals:", error);
         }
     };
-    
 
     const handleGoalChange = (index, value) => {
         const newGoals = [...goals];
