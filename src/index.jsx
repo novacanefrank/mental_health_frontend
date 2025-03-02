@@ -7,10 +7,8 @@ import LandingPage from "./components/LandingPage"; // Import the LandingPage co
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 import DailyExercises from "./components/DailyExercises";
-import MoodTracker from "./components/MoodTracker";
 import SetGoals from "./components/SetGoals";
 import JournalEntry from "./components/JournalEntry";
-import ReviewProgress from "./components/ReviewProgress";
 import About from "./components/About";
 import Insights from "./components/Insights";
 // import Profile from "./components/Profile";
@@ -27,10 +25,10 @@ createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/DailyExercises" element={<DailyExercises />} /> {/* Add this route */}
-        <Route path="/MoodTracker" element={<MoodTracker />} />
+       
         <Route path="/SetGoals" element={<SetGoals />} />
         <Route path="/JournalEntry" element={<JournalEntry />} />
-        <Route path="/ReviewProgress" element={<ReviewProgress />} />
+        
         <Route path="/About" element={<About />} />
         <Route path="/Insights" element={<Insights/>}/>
         {/* <Route path="/Profile" element={<Profile/>}/> */}
