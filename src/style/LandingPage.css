@@ -74,12 +74,18 @@ body {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+}
+
+.about-button a {
+  text-decoration: none; /* Removes underline from the Link */
+  color: #fff; /* Ensures the text color stays white */
 }
 
 .about-button:hover {
   background-color: #4f46e5;
 }
+
+
 
 /* Image Content */
 .image-content img {
@@ -123,7 +129,7 @@ body {
 
 .feature-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 15px #f163c6);
+  box-shadow: 0 4px 15px rgba(168, 80, 80, 0.15);
 }
 
 .feature-item h3 {
@@ -143,11 +149,109 @@ body {
   margin-bottom: 10px;
 }
 
+/* Insights Section */
+/* Insights Section */
+.insights-preview {
+  background: #f8f9fa; /* Soft light gray background */
+  padding: 30px 20px;  /* Reduced padding for a smaller section */
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+  margin: 20px auto;  /* Reduced margin for compactness */
+  max-width: 1200px; /* Increased max width for a wider section */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative Line */
+.insights-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 60%; /* Increased width for a more noticeable effect */
+  height: 4px;
+  background-color: #6366f1; /* Subtle color line */
+  border-radius: 5px;
+  transform: translateX(-50%);
+}
+
+.insights-preview h2 {
+  font-size: 1.8rem; /* Slightly smaller heading */
+  color: #444;
+  margin-bottom: 15px; /* Reduced margin */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+/* Insight Cards */
+.insight-post {
+  background-color: #fff;
+  padding: 20px;  /* Reduced padding */
+  border-radius: 12px;  /* Slightly smaller border radius */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06); /* Subtle shadow for a minimal effect */
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  max-width: 500px; /* Increased max-width to make the cards wider */
+  margin: 10px auto; /* Reduced margin */
+  border-left: 4px solid #6366f1; /* Accent border on the left */
+}
+
+/* Card Hover Effect */
+.insight-post:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  background-color: #f0f4ff; /* Light blue on hover */
+}
+
+/* Card Title */
+.insight-post h3 {
+  font-size: 1.5rem;  /* Smaller title */
+  color: #333;
+  margin-bottom: 10px;  /* Reduced margin */
+  font-weight: 600;
+}
+
+/* Card Description */
+.insight-post p {
+  font-size: 1rem;  /* Smaller description */
+  color: #666;
+  margin-bottom: 15px;  /* Reduced margin */
+  line-height: 1.5;  /* Slightly more compact line height */
+}
+
+/* Link Style */
+.insight-post a {
+  font-size: 1.1rem;  /* Slightly smaller link */
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.insight-post a:hover {
+  color: #4f46e5; /* Darker blue hover color */
+}
+
+
 /* Footer */
 .footer {
   text-align: center;
   padding: 20px;
-  background-color: #6366f1;
+  background-color: #6366f1; /* Soft blue background */
   color: #fff;
   font-size: 1rem;
+  border-radius: 8px; /* Rounded corners for footer */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for footer */
 }
+
+.footer p {
+  margin: 0;
+  font-weight: 500;
+}
+

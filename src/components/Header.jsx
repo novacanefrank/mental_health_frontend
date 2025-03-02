@@ -63,7 +63,6 @@ const Header = () => {
         <nav className="navbar">
           <ul className="nav-links">
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/reviews">Reviews</Link></li>
             <li><Link to="/about">About Us</Link></li>
             <li><Link to="/insights">Insights</Link></li>
           </ul>

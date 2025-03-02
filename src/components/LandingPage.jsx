@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaHeartbeat, FaBook, FaBullseye, FaSmile } from "react-icons/fa"; // Import icons
+import { FaHeartbeat, FaBook, FaBullseye } from "react-icons/fa"; // Import icons
 import "../style/LandingPage.css";
 
 const LandingPage = () => {
@@ -15,7 +15,7 @@ const LandingPage = () => {
             goals or reflecting on your day, we're here to support your journey.
           </p>
           <button className="about-button">
-          <Link to="/About">About Us</Link>
+            <Link to="/about">About Us</Link>
           </button>
         </div>
         <div className="image-content">
@@ -30,35 +30,49 @@ const LandingPage = () => {
           <div className="feature-item">
             <FaHeartbeat className="feature-icon" />
             <h3>Exercises</h3>
-            <p>Engage in mindfulness exercises designed to improve mental clarity and reduce stress.</p>
+            <p>
+              Engage in mindfulness exercises designed to improve mental clarity
+              and reduce stress.
+            </p>
           </div>
           <div className="feature-item">
             <FaBook className="feature-icon" />
             <h3>Journaling</h3>
-            <p>Reflect on your thoughts and feelings with our guided journaling prompts.</p>
+            <p>
+              Reflect on your thoughts and feelings with our guided journaling
+              prompts.
+            </p>
           </div>
           <div className="feature-item">
             <FaBullseye className="feature-icon" />
             <h3>Goal Setting</h3>
-            <p>Set achievable goals to foster growth and keep track of your progress.</p>
+            <p>
+              Set achievable goals to foster growth and keep track of your
+              progress.
+            </p>
           </div>
-          {/* <div className="feature-item">
-            <FaSmile className="feature-icon" />
-            <h3>Mood Tracker</h3>
-            <p>Monitor your mood daily to identify patterns and triggers.</p>
-          </div> */}
+        </div>
+      </section>
+
+      {/* Insights Section */}
+      <section className="insights-preview fade-in">
+        <h2>Latest Insights 💡</h2>
+        <div className="insight-post">
+          <h3>Start Your Day with Intention</h3>
+          <p>
+            Begin each day with a positive mindset. See more ways to improve
+            your mental well-being...
+          </p>
+          <Link to="/insights">Read More</Link>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="footer">
-        <p>&copy; 2025 Mental Health Help. All rights reserved.</p>
+        <p>&copy; 2025 Novana. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
 export default LandingPage;
-
-
-

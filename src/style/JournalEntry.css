@@ -133,3 +133,43 @@
     transform: translateY(-3px);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
+/* 🎯 Buttons inside old entries */
+.entry-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* ✏️ Update Button */
+.update-btn {
+    background-color: #4a90e2; /* Blue color for edit */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease-in-out;
+}
+
+.update-btn:hover {
+    background-color: #357abd; /* Darker blue on hover */
+}
+
+/* 🗑️ Delete Button */
+.delete-btn {
+    background-color: #e74c3c; /* Red color for delete */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+

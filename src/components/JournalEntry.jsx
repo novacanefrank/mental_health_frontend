@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import "../style/JournalEntry.css";
-import { addJournalEntry, getJournalEntries } from "../apis/api"; // Import the necessary API functions
+import {
+    addJournalEntry,
+    getJournalEntries,
+    updateJournalEntry,
+    deleteJournalEntry
+} from "../apis/api"; 
 
 const JournalEntry = () => {
     const [entry, setEntry] = useState("");
-    const [title, setTitle] = useState(""); // State for the title of the journal
-    const [oldEntries, setOldEntries] = useState([]); // State to hold old entries
-    const [showOldEntries, setShowOldEntries] = useState(false); // State to toggle old entries visibility
+    const [title, setTitle] = useState("");
+    const [oldEntries, setOldEntries] = useState([]);
+    const [showOldEntries, setShowOldEntries] = useState(false);
+    const [editingEntry, setEditingEntry] = useState(null); // Track entry being edited
+    const [editedTitle, setEditedTitle] = useState("");
+    const [editedEntry, setEditedEntry] = useState("");
 
     const userId = localStorage.getItem("userId");
 
@@ -21,17 +29,17 @@ const JournalEntry = () => {
             const newEntry = {
                 title,
                 entry,
-                userId, // Assuming you have the user ID available
-                Date: new Date().toISOString(), // Set the current date here
+                userId,
+                Date: new Date().toISOString(),
             };
 
-            // Call the API to save the journal entry
             const response = await addJournalEntry(newEntry);
             
             if (response.status === 201) {
                 alert("Journal entry saved! 📖");
-                setEntry(""); // Clears the input after saving
-                setTitle(""); // Clears the title input after saving
+                setEntry("");
+                setTitle("");
+                fetchOldEntries(); // Refresh entries after adding
             }
         } catch (error) {
             console.error("Error saving journal entry:", error);
@@ -42,37 +50,68 @@ const JournalEntry = () => {
     // Fetch old journal entries
     const fetchOldEntries = async () => {
         if (showOldEntries) {
-            setShowOldEntries(false); // Hide old entries if they're currently visible
+            setShowOldEntries(false);
             return;
         }
-    
+
         if (!userId) {
             alert("User not logged in. Please log in to view old journal entries.");
             return;
         }
-    
+
         try {
-            const response = await getJournalEntries(); // Assuming this function fetches all journal entries
-            console.log("Fetched entries:", response.data); // Log all entries
-            console.log("User ID from localStorage:", userId); // Log userId from localStorage
-            
-            // Log userId for each entry
-            response.data.forEach(entry => {
-                console.log("Entry userId:", entry.userId);
-            });
-    
-            const entries = response.data.filter(entry => entry.userId === Number(userId)); // Make sure the types match
-            console.log("Filtered entries:", entries); // Log the filtered entries
-            
+            const response = await getJournalEntries();
+            const entries = response.data.filter(entry => entry.userId === Number(userId));
             setOldEntries(entries);
-            setShowOldEntries(true); // Show the old entries section
+            setShowOldEntries(true);
         } catch (error) {
             console.error("Error fetching old entries:", error);
             alert("Error fetching old entries. Please try again.");
         }
     };
-    
-   
+
+    // Delete a journal entry
+    const handleDelete = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this entry?")) return;
+
+        try {
+            await deleteJournalEntry(id);
+            alert("Entry deleted successfully.");
+            setOldEntries(oldEntries.filter(entry => entry.id !== id)); // Remove from state
+        } catch (error) {
+            console.error("Error deleting entry:", error);
+            alert("Failed to delete entry.");
+        }
+    };
+
+    // Enable edit mode
+    const handleEdit = (entry) => {
+        setEditingEntry(entry.id);
+        setEditedTitle(entry.title);
+        setEditedEntry(entry.entry);
+    };
+
+    // Save the updated entry
+    const saveUpdatedEntry = async (id) => {
+        if (!editedTitle || !editedEntry) {
+            alert("Title and entry cannot be empty!");
+            return;
+        }
+
+        try {
+            await updateJournalEntry(id, { title: editedTitle, entry: editedEntry });
+            alert("Entry updated successfully.");
+            
+            setOldEntries(oldEntries.map(entry => 
+                entry.id === id ? { ...entry, title: editedTitle, entry: editedEntry } : entry
+            ));
+
+            setEditingEntry(null); // Exit edit mode
+        } catch (error) {
+            console.error("Error updating entry:", error);
+            alert("Failed to update entry.");
+        }
+    };
 
     return (
         <div className="journal-container">
@@ -83,7 +122,7 @@ const JournalEntry = () => {
                 className="journal-title-input"
                 placeholder="Enter the title of your journal"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)} // Update title on change
+                onChange={(e) => setTitle(e.target.value)}
             />
 
             <textarea
@@ -98,7 +137,6 @@ const JournalEntry = () => {
                 <button className="old-entries-btn" onClick={fetchOldEntries}>📜 Old Entries</button>
             </div>
 
-            {/* Display Old Entries */}
             {showOldEntries && (
                 <div className="old-entries-section">
                     <h3>Your Old Journal Entries</h3>
@@ -106,11 +144,35 @@ const JournalEntry = () => {
                         <p>No old entries found.</p>
                     ) : (
                         <div className="entries-grid">
-                            {oldEntries.map((entry, index) => (
-                                <div key={index} className="old-entry-box">
-                                    <h4 className="entry-title">{entry.title}</h4>
-                                    <p className="entry-content">{entry.entry}</p>
-                                    <small className="entry-date">{entry.Date}</small>
+                            {oldEntries.map((entry) => (
+                                <div key={entry.id} className="old-entry-box">
+                                    {editingEntry === entry.id ? (
+                                        <>
+                                            <input
+                                                type="text"
+                                                className="edit-title-input"
+                                                value={editedTitle}
+                                                onChange={(e) => setEditedTitle(e.target.value)}
+                                            />
+                                            <textarea
+                                                className="edit-entry-textarea"
+                                                value={editedEntry}
+                                                onChange={(e) => setEditedEntry(e.target.value)}
+                                            />
+                                            <button className="save-btn" onClick={() => saveUpdatedEntry(entry.id)}>✔ Save</button>
+                                            <button className="cancel-btn" onClick={() => setEditingEntry(null)}>✖ Cancel</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h4 className="entry-title">{entry.title}</h4>
+                                            <p className="entry-content">{entry.entry}</p>
+                                            <small className="entry-date">{entry.Date}</small>
+                                            <div className="entry-actions">
+                                                <button className="edit-btn" onClick={() => handleEdit(entry)}>✏ Edit</button>
+                                                <button className="delete-btn" onClick={() => handleDelete(entry.id)}>🗑 Delete</button>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             ))}
                         </div>

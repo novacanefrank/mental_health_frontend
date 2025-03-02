@@ -28,7 +28,8 @@ const addJournalEntry = (entryData) => api.post('/journalEntries/createJournalEn
 const updateJournalEntry = (id, data) => api.put(`/journalEntries/updateJournalEntry/${id}`, data);
 const deleteJournalEntry = (id) => api.delete(`/journalEntries/deleteJournalEntry/${id}`);
 
-const getNotes = () => api.get('/notes/getAllNotes');
+// Ensure your getNotes API call filters by userId
+const getNotes = (userId) => api.get(`/notes/getAllNotes?userId=${userId}`);
 const getNoteById=(id)=>api.get(`/notes/getNoteById/${id}`);
 const addNote = (noteData) => api.post('/notes/createNote', noteData);
 const updateNote = (id, data) => api.put(`/notes/updateNote/${id}`, data);
